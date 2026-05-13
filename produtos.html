@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Produtos</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>Cadastro de Produtos</h1>
+
+    <form action="/cadastrar_produto" method="POST">
+
+        <label>Nome:</label>
+        <input type="text" name="nome" required>
+
+        <label>Categoria:</label>
+        <input type="text" name="categoria" required>
+
+        <label>Preço:</label>
+        <input type="number"
+        step="0.01"
+        name="preco"
+        required>
+
+        <label>Quantidade:</label>
+        <input type="number"
+        name="quantidade"
+        required>
+
+        <button type="submit">
+            Cadastrar Produto
+        </button>
+
+    </form>
+
+    <br><br>
+
+    <table>
+
+        <tr>
+
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+
+        </tr>
+
+        {% for produto in produtos %}
+
+        <tr>
+
+            <td>{{ produto[0] }}</td>
+            <td>{{ produto[1] }}</td>
+            <td>{{ produto[2] }}</td>
+            <td>R$ {{ produto[3] }}</td>
+            <td>{{ produto[4] }}</td>
+
+            <td>
+
+                <a href="{{ url_for(
+                    'deletar_produto',
+                    id=produto[0]
+                ) }}">
+
+                    <button>
+                        Excluir
+                    </button>
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <br>
+
+    <a class="voltar" href="/">
+        Voltar
+    </a>
+
+</body>
+
+</html>
